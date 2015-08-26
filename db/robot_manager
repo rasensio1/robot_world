@@ -1,0 +1,17 @@
+---
+robots:
+- id: 3
+  name: blahblah
+  city: nap
+  state: a
+  birthdate: a
+  date_hired: a
+  department: a
+- id: 4
+  name: Jill
+  city: Naperville
+  state: IL
+  birthdate: June 20
+  date_hired: July 4
+  department: Marketing
+total: 4

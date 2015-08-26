@@ -1,0 +1,11 @@
+<h1>All Robots</h1>
+<a href = '/'>Home</a>
+<ul>
+<% @robots.each do |robot| %>
+  <li><a href= "/robots/<%=robot.id%>"><%=robot.name%></a>
+  <a href = "/robots/<%=robot.id%>/edit">Edit</a>
+  <form action = "/robots/<%=robot.id%>" method = "post">
+    <input type = 'hidden' name = '_method' value = 'delete'>
+    <input type = 'submit' value = 'delete'/>
+  </form>
+<%end %>

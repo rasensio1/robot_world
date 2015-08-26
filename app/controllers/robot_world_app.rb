@@ -1,27 +1,43 @@
-require 'sinatra'
 
 class RobotWorldApp < Sinatra::Base
   set :root, File.join(File.dirname(__FILE__), '..')
+  set :method_override, true
 
   get '/' do
-    'dashboard!'
-    #erb :dashboard 
+    erb :dashboard 
   end
 
   get '/robots' do
-    'All the robots'
-    #erb :all
+    @robots = RobotManager.all
+    erb :index
   end
 
-  get '/robots/:id' do
-    'One Robot'
-    #erb :show
+  get '/robots/new' do
+    erb :new
   end
 
-  post '/robots' do |id|
-    'new robot'
-    #RobotMaker
-    #redirect '/robots'
+  post '/robots' do 
+    RobotManager.create(params[:robot])
+    redirect '/robots'
   end
 
+  get '/robots/:id' do |id|
+    @robot = RobotManager.find(id.to_i)
+    erb :show
+  end
+
+  get '/robots/:id/edit' do |id|
+    @robot = RobotManager.find(id.to_i)
+    erb :edit
+  end
+
+  put '/robots/:id' do |id|
+   RobotManager.update(id.to_i, params[:robot])
+   redirect "/robots/#{id}"
+  end
+
+  delete '/robots/:id' do |id|
+    RobotManager.delete(id.to_i)
+    redirect '/robots'
+  end
 end
